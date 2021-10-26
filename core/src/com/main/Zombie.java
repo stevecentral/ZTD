@@ -43,9 +43,9 @@ public class Zombie {
 
     void prep_animations(){
         //slice image into cells
-        TextureRegion[][] sheet = TextureRegion.split(Resources.zombie_dif,
-                                                            Resources.zombie_dif.getWidth() / columns,
-                                                            Resources.zombie_dif.getHeight() / rows);
+        TextureRegion[][] sheet = TextureRegion.split(Resources.zombie,
+                                                            Resources.zombie.getWidth() / columns,
+                                                            Resources.zombie.getHeight() / rows);
 
         //set frames to maximum numbers pf cells
         frames = new TextureRegion[rows*columns];
