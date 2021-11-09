@@ -4,9 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Zombie {
-    int x, y,  w, h, speed;
+    int x, y,  w, h, speed, hp;
     String type;
     boolean active = true;
 
@@ -25,6 +26,7 @@ public class Zombie {
 
         w = 50;
         h = 50;
+        hp = 5;
 
         //make this last
         prep_animations();
@@ -37,8 +39,8 @@ public class Zombie {
     }
 
     void update(){
-        active = x > 0;
         x -= speed;
+        active = x >= 0 && hp > 0;
     }
 
     void prep_animations(){
@@ -57,4 +59,6 @@ public class Zombie {
 
             animation = new Animation(0.2f, frames);
     }
+
+    Rectangle hitbox() { return new Rectangle(x, y, w, h); }
 }

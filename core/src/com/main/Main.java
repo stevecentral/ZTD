@@ -14,6 +14,7 @@ public class Main extends ApplicationAdapter {
 	//TODO: game variables / objects
 	SpriteBatch batch;
 	static Random r = new Random();
+	static String current_type = "";
 
 	//TODO: game lists
 	static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
@@ -67,13 +68,49 @@ public class Main extends ApplicationAdapter {
 		if(Gdx.input.justTouched()){
 			int x = Gdx.input.getX(), y = Gdx.graphics.getHeight() - Gdx.input.getY();
 
+			for(Button b : buttons) {
+				if (b.t != null && !b.t.hidden && b.t.close.hitbox().contains(x, y)) {
+					b.t.hidden = true;
+					return;
+				}
+				if (b.t != null && !b.t.hidden && b.t.hitbox().contains(x, y)) return;
+				if (b.hitbox().contains(x, y)) {
+					if (b.locked) {
+						if (b.t.hidden) {
+							hidett();
+							b.t.hidden = false;
+						} else {
+							b.locked = false;
+							b.t.hidden = true;
+						}
+						return;
+					} else {
+						hidett();
+						deselect();
+						b.selected = true;
+						current_type = b.type;
+					}
+					return;
+				}
+			}
+
 			for (Cannon c : cannons) if(c.hitbox().contains(x, y)) return;
-			if(buildable(x, y))cannons.add(new Cannon("ccc", x, y));
+			if(buildable(x, y))cannons.add(new Cannon(current_type, x, y));
 		}
 	}
 
+	void deselect(){
+		for(Button b : buttons) {
+			b.selected = false;
+		}
+	}
+
+	void hidett(){
+		for(Button b : buttons) if(b.t != null) b.t.hidden = true;
+	}
+
 	boolean buildable(int x, int y){
-		return ((y <= 200 || 300 <= y && y <= 500) && (x <= 1000));
+		return ((y < 200 || 300 < y && y < 500) && (x < 1000));
 		//return true if you can build a cannon at this location
 
 		//return false if you can't
@@ -95,9 +132,11 @@ public class Main extends ApplicationAdapter {
 
 	void buttons_appear(){
 		//create 5 buttons
-		for(int i = 0; i < 5; i++){
-			buttons.add(new Button("bbb", 50 + i * 100, 525));
-		}
+		buttons.add(new Button("bbb", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("fire", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("super", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("double", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("laser", 50 + buttons.size() * 75, 525));
 	}
 
 	//*********************END OF FILE*********************
