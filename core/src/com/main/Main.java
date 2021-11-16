@@ -126,7 +126,7 @@ public class Main extends ApplicationAdapter {
 		if(!zombies.isEmpty()) return;
 		//create 15 zombies
 		for(int i = 0; i < 15; i++){
-			zombies.add(new Zombie("zzz", 1024 + i * 50, r.nextInt(450), 2));
+			zombies.add(new Zombie("riot", 1024 + i * 50, r.nextInt(450)));
 		}
 	}
 

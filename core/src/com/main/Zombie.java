@@ -12,21 +12,22 @@ public class Zombie {
     boolean active = true;
 
     //animation variables
-    int columns = 4, rows = 1;
+    int cols, rows = 1;
     Animation animation;
     TextureRegion[] frames;
     TextureRegion frame;
     float frame_time;
 
-    Zombie(String type, int x, int y, int speed){
+    Zombie(String type, int x, int y){
         this.type = type;
         this.x = x;
         this.y = y;
-        this.speed = speed;
+        this.speed = Tables.values.get("speed_" + type) == null ? 2 : Tables.values.get("speed_" + type);
+        this.cols = Tables.values.get("columns_" + type) == null ? 4 : Tables.values.get("columns_" + type);
 
-        w = 50;
-        h = 50;
-        hp = 5;
+        w = (Tables.zombie_resources.get(type) == null ? Resources.zombie : Tables.zombie_resources.get(type)).getWidth() / cols;
+        h = (Tables.zombie_resources.get(type) == null ? Resources.zombie : Tables.zombie_resources.get(type)).getHeight() / rows;
+        hp = Tables.values.get("health" + type) == null ? 3 : Tables.values.get("health_" + type);;
 
         //make this last
         prep_animations();
@@ -45,16 +46,14 @@ public class Zombie {
 
     void prep_animations(){
         //slice image into cells
-        TextureRegion[][] sheet = TextureRegion.split(Resources.zombie,
-                                                            Resources.zombie.getWidth() / columns,
-                                                            Resources.zombie.getHeight() / rows);
+        TextureRegion[][] sheet = TextureRegion.split(Tables.zombie_resources.get(type) == null ? Resources.zombie : Tables.zombie_resources.get(type), w, h);
 
         //set frames to maximum numbers pf cells
-        frames = new TextureRegion[rows*columns];
+        frames = new TextureRegion[rows*cols];
         int index = 0;
         //fill frames
         for(int r = 0; r < rows; r++)
-            for(int c = 0; c < columns; c++)
+            for(int c = 0; c < cols; c++)
                 frames[index++] = sheet[r][c];
 
             animation = new Animation(0.2f, frames);
