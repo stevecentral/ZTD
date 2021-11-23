@@ -137,6 +137,7 @@ public class Main extends ApplicationAdapter {
 		buttons.add(new Button("super", 50 + buttons.size() * 75, 525));
 		buttons.add(new Button("double", 50 + buttons.size() * 75, 525));
 		buttons.add(new Button("laser", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("missile", 50 + buttons.size() * 75, 525));
 	}
 
 	//*********************END OF FILE*********************

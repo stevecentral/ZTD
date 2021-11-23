@@ -19,6 +19,7 @@ public class Tables {
         tooltips.put("double", "Fires two low damage bullets at a slow rate of fire.");
         tooltips.put("laser", "Fires one giant bullet at a very slow rate of fire.");
         tooltips.put("mounted", "Fires low damage bullets at a low rate of fire.");
+        tooltips.put("missile", "it shoots, does not degrade.");
 
         //cannons
         cannon_resources.put("fire", Resources.cannon_fire);
@@ -26,6 +27,7 @@ public class Tables {
         cannon_resources.put("double", Resources.cannon_double);
         cannon_resources.put("laser", Resources.cannon_laser);
         cannon_resources.put("mounted", Resources.cannon_mounted);
+        cannon_resources.put("missile", Resources.cannon_missile);
 
         //buttons
         button_resources.put("fire", Resources.button_cannon_fire);
@@ -33,6 +35,7 @@ public class Tables {
         button_resources.put("double", Resources.button_cannon_double);
         button_resources.put("laser", Resources.button_cannon_laser);
         button_resources.put("mounted", Resources.button_cannon_mounted);
+        button_resources.put("missile", Resources.button_cannon_missile);
         button_resources.put("play", Resources.button_play);
         button_resources.put("pause", Resources.button_pause);
         button_resources.put("start", Resources.button_start);
@@ -50,6 +53,7 @@ public class Tables {
         values.put("place_super", 25);
         values.put("place_double", 20);
         values.put("place_laser", 100);
+        values.put("place_missile", 200);
 
         //cannon unlock costs
         values.put("unlock_fire", 300);
@@ -57,11 +61,13 @@ public class Tables {
         values.put("unlock_double", 250);
         values.put("unlock_laser", 1000);
         values.put("unlock_mounted", 300);
+        values.put("unlock_missile", 1000);
 
         //cannon fire delays
         values.put("delay_fire", 10);
         values.put("delay_double", 40);
         values.put("delay_laser", 100);
+        values.put("delay_missile", 150);
 
         //ZOMBIE SPEED
         values.put("speed_dif", 1);
@@ -78,5 +84,6 @@ public class Tables {
         //ANIMATION COLUMNS
         values.put("columns_laser", 16);
         values.put("columns_speedy", 6);
+        values.put("columns_missile", 16);
     }
 }
