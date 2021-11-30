@@ -21,6 +21,8 @@ public class Main extends ApplicationAdapter {
 	static ArrayList<Cannon> cannons = new ArrayList<Cannon>();
 	static ArrayList<Button> buttons = new ArrayList<Button>();
 	static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	static ArrayList<Effect> effect = new ArrayList<Effect>();
+	static ArrayList<Wall> walls = new ArrayList<Wall>();
 
 	//create runs *once* when the application starts / opens
 	@Override
@@ -43,6 +45,8 @@ public class Main extends ApplicationAdapter {
 		for(Cannon c: cannons) c.draw(batch);
 		for(Button b: buttons) b.draw(batch);
 		for(Bullet b: bullets) b.draw(batch);
+		for(Wall w: walls) w.draw(batch);
+		for(Effect e: effect) e.draw(batch);
 		//end drawing code before this
 		batch.end();
 	}
@@ -53,6 +57,7 @@ public class Main extends ApplicationAdapter {
 		for(Cannon c: cannons) c.update();
 		for(Button b: buttons) b.update();
 		for(Bullet b: bullets) b.update();
+		for(Wall w: walls) w.update();
 
 		//clean up after updates
 		housekeeping();
@@ -62,11 +67,15 @@ public class Main extends ApplicationAdapter {
 	void housekeeping(){
 		for(Zombie z: zombies) if(!z.active) {zombies.remove(z); break;}
 		for(Bullet b: bullets) if(!b.active) {bullets.remove(b); break;}
+		for(Effect e: effect) if(!e.active) {effect.remove(e); break;}
+		for(Wall w: walls) if(!w.active) {walls.remove(w); break;}
 	}
 
 	void tap(){
 		if(Gdx.input.justTouched()){
 			int x = Gdx.input.getX(), y = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+			effect.add(new Effect("click", x, y));
 
 			for(Button b : buttons) {
 				if (b.t != null && !b.t.hidden && b.t.close.hitbox().contains(x, y)) {
@@ -85,6 +94,10 @@ public class Main extends ApplicationAdapter {
 						}
 						return;
 					} else {
+						if(b.type.equals("wall") || b.type.equals("mounted")){
+							if(walls.size() < 3) walls.add(new Wall(walls.size() * 50, 0, b.type.equals("mounted")));
+							return;
+						}
 						hidett();
 						deselect();
 						b.selected = true;
@@ -133,11 +146,16 @@ public class Main extends ApplicationAdapter {
 	void buttons_appear(){
 		//create 5 buttons
 		buttons.add(new Button("bbb", 50 + buttons.size() * 75, 525));
+		buttons.get(buttons.size() - 1).selected = true;
+		buttons.get(buttons.size() - 1).locked = false;
 		buttons.add(new Button("fire", 50 + buttons.size() * 75, 525));
 		buttons.add(new Button("super", 50 + buttons.size() * 75, 525));
 		buttons.add(new Button("double", 50 + buttons.size() * 75, 525));
 		buttons.add(new Button("laser", 50 + buttons.size() * 75, 525));
 		buttons.add(new Button("missile", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("wall", 50 + buttons.size() * 75, 525));
+		buttons.get(buttons.size() - 1).locked = false;
+		buttons.add(new Button("mounted", 50 + buttons.size() * 75, 525));
 	}
 
 	//*********************END OF FILE*********************

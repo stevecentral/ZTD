@@ -25,6 +25,8 @@ public class Resources {
     static Texture button_selected = new Texture(Gdx.files.internal("border.png"));
     static Texture button_locked = new Texture(Gdx.files.internal("locked.png"));
     static Texture button_close = new Texture(Gdx.files.internal("x.png"));
+    static Texture wall = new Texture(Gdx.files.internal("Wall.png"));
+    static Texture button_wall = new Texture(Gdx.files.internal("WallIcon.png"));
 
     //TODO: CANNONS
     static Texture cannon = new Texture(Gdx.files.internal("Cannon.png"));
@@ -46,4 +48,8 @@ public class Resources {
     static Texture zombie_fast = new Texture(Gdx.files.internal("Fastzombies.png"));
     static Texture zombie_speedy = new Texture(Gdx.files.internal("speedy_zombie.png"));
     static Texture zombie_riot = new Texture(Gdx.files.internal("riotzombieBIG.png"));
+
+    //TODO: EFFECTS
+    static Texture boom = new Texture(Gdx.files.internal("boom.png"));
+    static Texture click = new Texture(Gdx.files.internal("click_effect.png"));
 }
