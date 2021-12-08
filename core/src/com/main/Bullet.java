@@ -43,8 +43,14 @@ public class Bullet {
     }
 
     float calculate_angle(){
-        float zx = Main.zombies.get(0).x + Main.zombies.get(0).w / 2, zy = Main.zombies.get(0).y + Main.zombies.get(0).h / 2;
-        return (float)(Math.atan((y - zy) / (x - zx)) + (x >= zx ? Math.PI : 0));
+        Zombie closest = null;
+        for(Zombie z: Main.zombies){
+            if(closest == null) {closest = z; continue; }
+            float closest_dif = (float)Math.sqrt((x - closest.x)^2 + (y - closest.y)^2);
+            float z_dif = (float)Math.sqrt((x - z.x)^2 + (y - z.y)^2);
+            if(z_dif < closest_dif) closest = z;
+        }
+        return (float)(Math.atan((float)(y - (closest.y + closest.h / 2)) / (float)(x - (closest.x + closest.w / 2))) + (x >= closest.x ? Math.PI : 0));
     }
 
     Rectangle hitbox() { return new Rectangle(x, y, w, h); }

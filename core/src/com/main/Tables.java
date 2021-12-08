@@ -53,6 +53,7 @@ public class Tables {
         zombie_resources.put("fast", Resources.zombie_fast);
         zombie_resources.put("speedy", Resources.zombie_speedy);
         zombie_resources.put("riot", Resources.zombie_riot);
+        zombie_resources.put("festive", Resources.zombie_festive);
 
         //cannon placement costs
         values.put("place_fire", 30);
@@ -80,12 +81,14 @@ public class Tables {
         values.put("speed_speedy", 5);
         values.put("speed_fast", 3);
         values.put("speed_riot", 1);
+        values.put("speed_festive", 1);
 
         //ZOMBIE HEALTH
-        values.put("health_dif", 4);
-        values.put("health_speedy", 2);
-        values.put("health_fast", 3);
-        values.put("health_riot", 10);
+        values.put("health_dif", 7);
+        values.put("health_speedy", 5);
+        values.put("health_fast", 8);
+        values.put("health_riot", 15);
+        values.put("health_festive", 5);
 
         //ANIMATION COLUMNS
         values.put("columns_laser", 16);

@@ -48,8 +48,10 @@ public class Resources {
     static Texture zombie_fast = new Texture(Gdx.files.internal("Fastzombies.png"));
     static Texture zombie_speedy = new Texture(Gdx.files.internal("speedy_zombie.png"));
     static Texture zombie_riot = new Texture(Gdx.files.internal("riotzombieBIG.png"));
+    static Texture zombie_festive = new Texture(Gdx.files.internal("festivezombie.png"));
 
     //TODO: EFFECTS
     static Texture boom = new Texture(Gdx.files.internal("boom.png"));
     static Texture click = new Texture(Gdx.files.internal("click_effect.png"));
+    static Texture saw = new Texture(Gdx.files.internal("saw.png"));
 }
