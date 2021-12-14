@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -42,6 +43,7 @@ public class Main extends ApplicationAdapter {
 		//add drawing code after this
 		batch.begin();
 		batch.draw(Resources.bg, 0, 0);
+		UI.draw(batch);
 		for(Zombie z: zombies) z.draw(batch);
 		for(Cannon c: cannons) c.draw(batch);
 		for(Button b: buttons) b.draw(batch);
@@ -116,7 +118,10 @@ public class Main extends ApplicationAdapter {
 			}
 
 			for (Cannon c : cannons) if(c.hitbox().contains(x, y)) return;
-			if(buildable(x, y))cannons.add(new Cannon(current_type, x, y));
+			if(buildable(x, y) && UI.money >= Tables.values.get("place_" + current_type)){
+				UI.money -= Tables.values.get("place_" + current_type);
+				cannons.add(new Cannon(current_type, x, y));
+			}
 		}
 	}
 
@@ -143,27 +148,52 @@ public class Main extends ApplicationAdapter {
 		buttons_appear();
 	}
 
+	ArrayList<String> ztypes = new ArrayList<String>(); //this exists for spawn zombies
 	void spawn_zombies(){
 		if(!zombies.isEmpty()) return;
-		//create 15 zombies
-		for(int i = 0; i < 15; i++){
-			zombies.add(new Zombie("festive", 1024 + i * 50, r.nextInt(450)));
+		UI.wave++;
+
+		switch(UI.wave){
+			case 2:
+				ztypes.add("festive");
+				break;
+			case 5:
+				ztypes.add("dif");
+				break;
+			case 10:
+				ztypes.add("fast");
+				break;
+			case 15:
+				ztypes.add("speedy");
+				break;
+			case 20:
+				ztypes.add("riot");
+				break;
+			default:
+				ztypes.add("zzz");
+				break;
+		}
+		//create zombies
+		for(int i = 0; i < UI.wave * 5; i++){
+			zombies.add(new Zombie(ztypes.get(r.nextInt(ztypes.size())), 1024 + i * 50, r.nextInt(450)));
 		}
 	}
 
 	void buttons_appear(){
 		//create buttons
-		buttons.add(new Button("bbb", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("bbb", 200 + buttons.size() * 75, 525));
 		buttons.get(buttons.size() - 1).selected = true;
 		buttons.get(buttons.size() - 1).locked = false;
-		buttons.add(new Button("fire", 50 + buttons.size() * 75, 525));
-		buttons.add(new Button("super", 50 + buttons.size() * 75, 525));
-		buttons.add(new Button("double", 50 + buttons.size() * 75, 525));
-		buttons.add(new Button("laser", 50 + buttons.size() * 75, 525));
-		buttons.add(new Button("missile", 50 + buttons.size() * 75, 525));
-		buttons.add(new Button("wall", 50 + buttons.size() * 75, 525));
+		current_type = "cannon";
+		buttons.add(new Button("fire", 200 + buttons.size() * 75, 525));
+		buttons.add(new Button("super", 200 + buttons.size() * 75, 525));
+		buttons.add(new Button("double", 200 + buttons.size() * 75, 525));
+		buttons.add(new Button("laser", 200 + buttons.size() * 75, 525));
+		buttons.add(new Button("missile", 200 + buttons.size() * 75, 525));
+		buttons.add(new Button("wall", 200 + buttons.size() * 75, 525));
 		buttons.get(buttons.size() - 1).locked = false;
-		buttons.add(new Button("mounted", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("mounted", 200 + buttons.size() * 75, 525));
+		buttons.add(new Button("saw", 200 + buttons.size() * 75, 525));
 		buttons.add(new Button("pause", 1024 - 75, 525));
 		buttons.get(buttons.size() - 1).locked = false;
 		buttons.get(buttons.size() - 1).selected = false;

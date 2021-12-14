@@ -17,7 +17,7 @@ public class Resources {
     static Texture button_cannon_double = new Texture(Gdx.files.internal("doubleCannonIcon.png"));
     static Texture button_cannon_laser = new Texture(Gdx.files.internal("laserCannonIcon.png"));
     static Texture button_cannon_mounted = new Texture(Gdx.files.internal("mountedCannonIcon.png"));
-    static Texture button_cannon_missile = new Texture(Gdx.files.internal("MissileIcon.png"));
+    static Texture button_cannon_missile = new Texture(Gdx.files.internal("missileIcon.png"));
     static Texture button_play = new Texture(Gdx.files.internal("play.png"));
     static Texture button_pause = new Texture(Gdx.files.internal("pause.png"));
     static Texture button_start = new Texture(Gdx.files.internal("startButton.png"));
@@ -27,6 +27,7 @@ public class Resources {
     static Texture button_close = new Texture(Gdx.files.internal("x.png"));
     static Texture wall = new Texture(Gdx.files.internal("Wall.png"));
     static Texture button_wall = new Texture(Gdx.files.internal("WallIcon.png"));
+    static Texture button_saw = new Texture(Gdx.files.internal("sawIcon.png"));
 
     //TODO: CANNONS
     static Texture cannon = new Texture(Gdx.files.internal("Cannon.png"));
@@ -35,7 +36,8 @@ public class Resources {
     static Texture cannon_double = new Texture(Gdx.files.internal("doubleCannon.png"));
     static Texture cannon_laser = new Texture(Gdx.files.internal("laserCannon.png"));
     static Texture cannon_mounted = new Texture(Gdx.files.internal("mountedCannon.png"));
-    static Texture cannon_missile = new Texture(Gdx.files.internal("Missile.png"));
+    static Texture cannon_missile = new Texture(Gdx.files.internal("missileCannon.png"));
+    static Texture saw = new Texture(Gdx.files.internal("saw.png"));
 
     //TODO: BULLETS
     static Texture bullet = new Texture(Gdx.files.internal("Bullet.png"));
@@ -53,5 +55,4 @@ public class Resources {
     //TODO: EFFECTS
     static Texture boom = new Texture(Gdx.files.internal("boom.png"));
     static Texture click = new Texture(Gdx.files.internal("click_effect.png"));
-    static Texture saw = new Texture(Gdx.files.internal("saw.png"));
 }

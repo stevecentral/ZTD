@@ -1,6 +1,8 @@
 package com.main;
 
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Button {
@@ -8,6 +10,7 @@ public class Button {
     String type;
     boolean locked, selected;
     ToolTip t;
+
 
     Button(String type, int x, int y){
         this.type = type;
@@ -30,4 +33,5 @@ public class Button {
     Rectangle hitbox() { return new Rectangle(x, y, w, h); }
 
     void update() {}
+
 }
