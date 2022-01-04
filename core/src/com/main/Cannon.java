@@ -11,7 +11,9 @@ public class Cannon {
     Sprite sprite;
     int x, y, w, h;
     String type;
-    int counter = 0, delay;
+    int counter = 0, delay, hp;
+    float chunk;
+    boolean active = true, damaged = false;
 
     //Animation Variables
     int cols, rows = 1;
@@ -27,6 +29,10 @@ public class Cannon {
         cols = Tables.values.get("columns_" + type) == null ? 1 : Tables.values.get("columns_" + type);
         w = (Tables.cannon_resources.get(type) == null ? Resources.cannon : Tables.cannon_resources.get(type)).getWidth() / cols;
         h = (Tables.cannon_resources.get(type) == null ? Resources.cannon : Tables.cannon_resources.get(type)).getHeight() / rows;
+
+        hp = (Tables.values.get("health" + type) == null ? 15 : Tables.values.get("health_" + type));
+        chunk = (float)w / hp;
+
         this.x = grid_lock(x - w / 2);
         this.y = grid_lock(y - h / 2);
         sprite.setPosition(this.x, this.y);
@@ -35,14 +41,24 @@ public class Cannon {
 
     void draw(SpriteBatch batch){
         sprite.draw(batch);
+
+        if(damaged){
+            batch.draw(Resources.damaged, x, y);
+            return;
+        }
+        batch.draw(Resources.red_bar, x, y + h, w, 3);
+        batch.draw(Resources.green_bar, x, y + h, hp * chunk, 3);
     }
 
     void update() {
+        damaged = ((!type.equals("super")) && !(type.equals("missile"))) && hp < 0;
+        if(damaged) return;
         frame_time  += Gdx.graphics.getDeltaTime();
         frame = (TextureRegion)animation.getKeyFrame(frame_time, true);
         sprite = new Sprite(frame);
         sprite.setPosition(this.x, this.y);
         sprite.setRotation(calculate_angle());
+
         fire();
     }
 
@@ -50,6 +66,7 @@ public class Cannon {
         if (counter++ < delay) return;
         counter = 0;
         Main.bullets.add(new Bullet("bbb", x + w / 2, y + h / 2));
+        hp--;
     }
 
     int grid_lock(int n){

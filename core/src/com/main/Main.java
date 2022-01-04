@@ -14,9 +14,10 @@ import java.util.Random;
 public class Main extends ApplicationAdapter {
 	//TODO: game variables / objects
 	SpriteBatch batch;
+	Start start;
 	static Random r = new Random();
 	static String current_type = "";
-	static boolean pause = false;
+	static boolean pause = false, started = false;
 
 	//TODO: game lists
 	static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
@@ -40,6 +41,7 @@ public class Main extends ApplicationAdapter {
 		ScreenUtils.clear(0, 0, 0, 1);
 		//right before drawing
 		update();
+		if(!started) { batch.begin(); start.draw(batch); batch.end(); return; }
 		//add drawing code after this
 		batch.begin();
 		batch.draw(Resources.bg, 0, 0);
@@ -56,6 +58,7 @@ public class Main extends ApplicationAdapter {
 
 	void update(){
 		tap();
+		if(!started) return;
 		if(!pause) {
 			for (Zombie z : zombies) z.update();
 			for (Cannon c : cannons) c.update();
@@ -71,6 +74,7 @@ public class Main extends ApplicationAdapter {
 
 	void housekeeping(){
 		for(Zombie z: zombies) if(!z.active) {zombies.remove(z); break;}
+		for(Cannon c: cannons) if(!c.active) {cannons.remove(c); break;}
 		for(Bullet b: bullets) if(!b.active) {bullets.remove(b); break;}
 		for(Effect e: effect) if(!e.active) {effect.remove(e); break;}
 		for(Wall w: walls) if(!w.active) {walls.remove(w); break;}
@@ -117,7 +121,10 @@ public class Main extends ApplicationAdapter {
 				}
 			}
 
-			for (Cannon c : cannons) if(c.hitbox().contains(x, y)) return;
+			for (Cannon c : cannons) if(c.hitbox().contains(x, y)) {
+				c.active = !c.damaged;
+				return;
+			}
 			if(buildable(x, y) && UI.money >= Tables.values.get("place_" + current_type)){
 				UI.money -= Tables.values.get("place_" + current_type);
 				cannons.add(new Cannon(current_type, x, y));
@@ -143,6 +150,7 @@ public class Main extends ApplicationAdapter {
 	}
 
 	void setup(){
+		start = new Start();
 		Tables.init();
 		spawn_zombies();
 		buttons_appear();

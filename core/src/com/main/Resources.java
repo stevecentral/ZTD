@@ -9,6 +9,7 @@ public class Resources {
     static Texture red_bar = new Texture(Gdx.files.internal("red_bar.png"));
     static Texture green_bar = new Texture(Gdx.files.internal("green_bar.png"));
     static Texture tooltip_bg = new Texture(Gdx.files.internal("ttbg.png"));
+    static Texture title = new Texture(Gdx.files.internal("ztdtitle.png"));
 
     //TODO: BUTTONS
     static Texture button_cannon = new Texture(Gdx.files.internal("CannonIcon.png"));
@@ -38,6 +39,7 @@ public class Resources {
     static Texture cannon_mounted = new Texture(Gdx.files.internal("mountedCannon.png"));
     static Texture cannon_missile = new Texture(Gdx.files.internal("missileCannon.png"));
     static Texture saw = new Texture(Gdx.files.internal("saw.png"));
+    static Texture damaged = new Texture(Gdx.files.internal("damaged.png"));
 
     //TODO: BULLETS
     static Texture bullet = new Texture(Gdx.files.internal("Bullet.png"));
