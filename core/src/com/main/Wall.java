@@ -28,7 +28,7 @@ public class Wall {
         for(Cannon c : cannons) {
             c.update();
             c.active = !c.damaged;
-            if(!c.active) { cannons.remove(c); Main.effect.add(new Effect("boom", c.x + c.w / 2, c.y + c.h / 2)) ;break; }
+            if(!c.active) { cannons.remove(c); ztd.effect.add(new Effect("boom", c.x + c.w / 2, c.y + c.h / 2)) ;break; }
         }
         active = hp > 0;
     }

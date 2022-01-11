@@ -65,7 +65,7 @@ public class Cannon {
     void fire(){
         if (counter++ < delay) return;
         counter = 0;
-        Main.bullets.add(new Bullet("bbb", x + w / 2, y + h / 2));
+        ztd.bullets.add(new Bullet("bbb", x + w / 2, y + h / 2));
         hp--;
     }
 
@@ -77,7 +77,7 @@ public class Cannon {
 
     float calculate_angle(){
         Zombie closest = null;
-        for(Zombie z: Main.zombies){
+        for(Zombie z: ztd.zombies){
             if(closest == null) {closest = z; continue; }
             float closest_dif = (float)Math.sqrt((x - closest.x)^2 + (y - closest.y)^2);
             float z_dif = (float)Math.sqrt((x - z.x)^2 + (y - z.y)^2);
