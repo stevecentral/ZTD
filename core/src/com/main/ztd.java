@@ -47,6 +47,7 @@ public class ztd {
         //clean up after updates
         housekeeping();
         spawn_zombies();
+        Main.gameover = !(UI.life > 0);
     }
 
     void housekeeping(){
@@ -124,6 +125,22 @@ public class ztd {
     }
 
     void setup(){
+        //set some UI values
+        UI.money = 1000;
+        UI.life = 5;
+        UI.wave = 0;
+        UI.score = 0;
+        //clear lists
+
+        //clear lists
+        buttons.clear();
+        zombies.clear();
+        cannons.clear();
+        effect.clear();
+        walls.clear();
+        bullets.clear();
+
+        //init tables
         Tables.init();
         spawn_zombies();
         buttons_appear();

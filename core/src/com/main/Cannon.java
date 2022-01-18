@@ -51,7 +51,7 @@ public class Cannon {
     }
 
     void update() {
-        damaged = ((!type.equals("super")) && !(type.equals("missile"))) && hp < 0;
+        damaged = !type.equals("super") && hp < 0;
         if(damaged) return;
         frame_time  += Gdx.graphics.getDeltaTime();
         frame = (TextureRegion)animation.getKeyFrame(frame_time, true);
