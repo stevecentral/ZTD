@@ -16,6 +16,8 @@ public class Lose {
 
             Main.started = false;
             Main.gameover = false;
+            Main.p.putInteger("zk", UI.zk);
+            Main.p.flush();
             Main.ztd = new ztd();
         }
     }
