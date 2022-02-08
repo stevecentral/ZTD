@@ -10,22 +10,25 @@ public class mButton {
     int x, y, w, h, b = 2;
     Color color;
     String type;
+    String text;
     BitmapFont font = new BitmapFont();
     GlyphLayout layout = new GlyphLayout();
     static final int bw = 150;
     static final int bh = 75;
 
-    mButton(String type, int x, int y, int w, int h, Color color){
+    mButton(String type, int x, int y, int w, int h, Color color) {
         this.type = type;
+        this.text = type.equals("start") ? "Start" :
+                type.equals("about") ? "About" :
+                        type.equals("achieve") ? "Achievements" :
+                                type;
         this.color = color;
         font.setColor(Resources.inverse_colour(color));
-        while((layout.width < w - (float)w/2) && (layout.height < h - (float)h/2)){
+        while ((layout.width < w - 4 * (float) w / 10) && (layout.height < h - 3 * (float) h / 10)) {
             font.getData().setScale(font.getData().scaleX + 0.1f);
             layout.setText(
                     font,
-                    type.equals("start") ? "Start" :
-                            type.equals("about") ? "About" :
-                                    "Button"
+                    text
             );
         }
         this.x = x;
@@ -34,14 +37,20 @@ public class mButton {
         this.h = h;
     }
 
-    void draw(SpriteBatch batch){
-        batch.draw(Resources.create_texture(1, 1, color), x, y, w, h);
-        font.draw(batch, layout, x + w / 2 - layout.width / 2, y + h / 2 + layout.height / 2);
-        batch.draw(Resources.create_texture(1, 1, Resources.inverse_colour(color)), x, y, w, b);
-        batch.draw(Resources.create_texture(1, 1, Resources.inverse_colour(color)), x, y + h, w, b);
-        batch.draw(Resources.create_texture(1, 1, Resources.inverse_colour(color)), x, y, b, h);
-        batch.draw(Resources.create_texture(1, 1, Resources.inverse_colour(color)), x + w - b, y, b, h);
+
+    void draw(SpriteBatch batch) {
+
+        batch.draw(Resources.create_texture(color), x, y, w, h);
+
+        font.setColor(color);
+        font.draw(batch, text, x + (float) w / 2 - (float) layout.width / 2 + 1, y + (float) h / 2 + (float) layout.height / 2 - 1);
+        font.draw(batch, layout, x + (float) w / 2 - (float) layout.width / 2, y + (float) h / 2 + (float) layout.height / 2);
+        batch.draw(Resources.create_texture(Resources.inverse_colour(color)), x, y, w, b);
+        batch.draw(Resources.create_texture(Resources.inverse_colour(color)), x, y + h, w, b);
+        batch.draw(Resources.create_texture(Resources.inverse_colour(color)), x, y, b, h);
+        batch.draw(Resources.create_texture(Resources.inverse_colour(color)), x + w - b, y, b, h);
     }
 
     Rectangle hitbox() { return new Rectangle(x, y, w, h); }
+
 }
